@@ -17,17 +17,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishConfig();
         $this->publishMigrations();
     }
-
+    
     private function mergeConfig()
     {
-        $path = $this->getConfigPath();
-        $this->mergeConfigFrom($path, 'bar');
+        $this->mergeConfigFrom($this->getConfigPath(), 'logs');
     }
-
+    
     private function publishConfig()
     {
-        $path = $this->getConfigPath();
-        $this->publishes([$path => config_path('logs.php')], 'config');
+        // Publish a config file
+        $this->publishes([ $this->getConfigPath() => config_path('logs.php'), ], 'config');
     }
 
     private function publishMigrations()
