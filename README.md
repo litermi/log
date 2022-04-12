@@ -24,14 +24,14 @@ set provider
 ```php
 'providers' => [
     // ...
-    Cirelramos\Logs\Providers\ServiceProvider::class,
+    Litermi\Logs\Providers\ServiceProvider::class,
 ],
 ```
 
 
 The defaults are set in `config/logs.php`. Publish the config to copy the file to your own config:
 ```sh
-php artisan vendor:publish --provider="Cirelramos\Logs\Providers\ServiceProvider"
+php artisan vendor:publish --provider="Litermi\Logs\Providers\ServiceProvider"
 ```
 
 > **Note:** this is necessary to you can change default config
@@ -44,7 +44,7 @@ add provider in config/app.php
 
 ```php
     'providers' => [
-        Cirelramos\Logs\Providers\QueryLogProvider::class,
+        Litermi\Logs\Providers\QueryLogProvider::class,
    ]
 ```
 

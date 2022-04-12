@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\Logs\Providers;
+namespace Litermi\Logs\Providers;
 
 /**
  *
@@ -17,12 +17,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishConfig();
         $this->publishMigrations();
     }
-    
+
     private function mergeConfig()
     {
         $this->mergeConfigFrom($this->getConfigPath(), 'logs');
     }
-    
+
     private function publishConfig()
     {
         // Publish a config file

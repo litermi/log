@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cirelramos\\Logs\\": "src/"
+            "Litermi\\Logs\\": "src/"
         }
     },
     "extra": {

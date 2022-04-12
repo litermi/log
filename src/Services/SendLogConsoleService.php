@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\Logs\Services;
+namespace Litermi\Logs\Services;
 
 use Exception;
 use Illuminate\Http\Request;
