@@ -6,6 +6,8 @@
 
 The `logs` package to send logs to console with extra info and catch query sql .
 
+##### [Tutorial how create composer package](https://cirelramos.blogspot.com/2022/04/how-create-composer-package.html)
+
 
 ## Installation
 
@@ -32,7 +34,7 @@ The defaults are set in `config/logs.php`. Publish the config to copy the file t
 php artisan vendor:publish --provider="Cirelramos\Logs\Providers\ServiceProvider"
 ```
 
-> **Note:** this is necessary to yo can change default config
+> **Note:** this is necessary to you can change default config
 
 
 
