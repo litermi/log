@@ -1,5 +1,5 @@
 {
-    "name": "cirelramos/logs",
+    "name": "litermi/logs",
     "description": "package to log routines and sql query",
     "type": "library",
     "license": "MIT",

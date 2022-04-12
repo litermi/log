@@ -11,9 +11,9 @@ The `logs` package to send logs to console with extra info and catch query sql .
 
 ## Installation
 
-Require the `cirelramos/logs` package in your `composer.json` and update your dependencies:
+Require the `litermi/logs` package in your `composer.json` and update your dependencies:
 ```sh
-composer require cirelramos/logs
+composer require litermi/logs
 ```
 
 
