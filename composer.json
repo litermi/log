@@ -23,6 +23,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Litermi\\Logs\\Providers\\ServiceProvider"
+            ]
         }
     },
     "authors": [
