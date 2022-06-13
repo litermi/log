@@ -11,6 +11,53 @@ use Illuminate\Support\Facades\Log;
  */
 class SendLogConsoleService
 {
+
+    /**
+     * @var
+     */
+    public $type_log = "";
+
+    public function __construct()
+    {
+        $this->type_log = "full";
+    }
+
+    /**
+     * @return $this
+     */
+    public function simple(): self
+    {
+        $this->type_log = "simple";
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function full(): self
+    {
+        $this->type_log = "full";
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function typeLog(string $typeLog): self
+    {
+        $this->type_log = $typeLog;
+        return $this;
+    }
+
+    /**
+     * @param $message
+     * @param $extraValues
+     * @return void|null
+     */
+    public function log($message, $extraValues = []){
+      return $this->execute($message, $extraValues);
+    }
+
     /**
      * @param $message
      * @param $extraValues
@@ -36,10 +83,19 @@ class SendLogConsoleService
      * @param Request $request
      * @param         $message
      * @param         $extraValues
-     * @return array
      */
-    private function getBasicInfoLog(Request $request, $message, $extraValues): array
+    private function getBasicInfoLog(Request $request, $message, $extraValues): void
     {
+
+        if($this->type_log === "simple"){
+            $values = [];
+            $values[ 'data_log' ][ 'time' ]         = gmdate("Y-m-d H:i:s");
+            $values[ 'data_log' ][ 'message' ]      = $message;
+            $values[ 'data_log' ][ 'extra_values' ] = $extraValues;
+            $this->logConsoleDirect($values);
+            return;
+        }
+
         $parameters = $request->request->all();
         $headers    = GetAllValuesFromHeaderService::execute($request);
         $headers    = $headers->toArray();
@@ -75,8 +131,6 @@ class SendLogConsoleService
         }
 
         $this->logConsoleDirect($values);
-
-        return $extraValues;
     }
 
     /**

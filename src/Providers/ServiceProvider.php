@@ -2,6 +2,8 @@
 
 namespace Litermi\Logs\Providers;
 
+use Litermi\Logs\Services\SendLogConsoleService;
+
 /**
  *
  */
@@ -9,6 +11,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {
+
+        $this->app->bind('send-log-console-service', function()
+        {
+            return new SendLogConsoleService();
+        });
+
         $this->mergeConfig();
     }
 
