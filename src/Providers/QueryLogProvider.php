@@ -47,8 +47,10 @@ class QueryLogProvider extends ServiceProvider
                     return null;
                 }
 
+                $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
                 $arrayQuery     = [
                     'time_query' => $query->time,
+                    'query_active' => $queryActive,
                 ];
                 $sendConsoleLog = new SendLogConsoleService();
                 $sendConsoleLog->execute('query complete:' . $sql, $arrayQuery);
