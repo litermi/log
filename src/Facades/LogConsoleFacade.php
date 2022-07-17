@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static self simple()
  * @method static self full()
  * @method static self typeLog(string $connection)
- * @method static void log(string $message, array $extraValues)
+ * @method static void log(string $message, array $extraValues = [])
  *
  */
 class LogConsoleFacade extends Facade
