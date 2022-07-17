@@ -13,8 +13,7 @@
         "illuminate/database": "^7.20|^8.19|^9.0",
         "illuminate/http": "^7.20|^8.19|^9.0",
         "illuminate/contracts": "^7.20|^8.19|^9.0",
-        "illuminate/config": "^7.20|^8.19|^9.0",
-        "litermi/cache-query-builder": "^1.0"
+        "illuminate/config": "^7.20|^8.19|^9.0"
     },
     "autoload": {
         "psr-4": {

@@ -44,7 +44,7 @@ class QueryLogService
             return null;
         }
 
-        $queryActive    = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
+        $queryActive    = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
         $arrayQuery     = [
             'time_query'   => $query->time,
             'query_active' => $queryActive,
