@@ -47,6 +47,7 @@ class QueryRecordLogService
                     $extraValues = [
                         'query_active' => $queryActive,
                     ];
+                    $sql = Str::replace(array("\r", "\n"), " ", $sql);
                     LogConsoleFacade::full()->log('query complete: ' . $sql, $extraValues);
                     throw new Exception("disable query");
                 }
