@@ -4,7 +4,6 @@ namespace Litermi\Logs\Services;
 
 use DateTime;
 use Illuminate\Support\Str;
-use Litermi\Cache\Models\ModelCacheConst;
 
 /**
  *
