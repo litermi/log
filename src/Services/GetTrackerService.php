@@ -13,9 +13,12 @@ class GetTrackerService
     /**
      * @return mixed
      */
-    public static function execute()
+    public static function execute($trace = [])
     {
-        $tracker = collect(debug_backtrace());
+        if(empty($trace)){
+            $trace = debug_backtrace();
+        }
+        $tracker = collect($trace);
         $tracker = $tracker->filter( self::filterHasRoute() );
         $tracker = $tracker->map( self::mapRemoveExtraElement() );
         $tracker = $tracker->values();
