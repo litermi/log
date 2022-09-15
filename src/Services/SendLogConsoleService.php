@@ -17,6 +17,11 @@ class SendLogConsoleService
      */
     public $type_log = "";
 
+    /**
+     * @var
+     */
+    public bool $tracker = false;
+
     public function __construct()
     {
         $this->type_log = "full";
@@ -37,6 +42,15 @@ class SendLogConsoleService
     public function full(): self
     {
         $this->type_log = "full";
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function tracker(): self
+    {
+        $this->tracker = true;
         return $this;
     }
 
@@ -67,6 +81,9 @@ class SendLogConsoleService
     {
         if ( !is_array($extraValues)) {
             $extraValues = [];
+        }
+        if($this->tracker === true){
+            $extraValues[ 'tracker' ] = GetTrackerService::execute();
         }
         $request = request();
         foreach (config('logs.exclude_log_by_endpoint') as $exclude) {
