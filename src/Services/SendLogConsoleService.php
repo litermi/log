@@ -82,7 +82,7 @@ class SendLogConsoleService
         if ( !is_array($extraValues)) {
             $extraValues = [];
         }
-        if($this->tracker === true){
+        if ($this->tracker === true && array_key_exists('tracker', $extraValues) === false) {
             $extraValues[ 'tracker' ] = GetTrackerService::execute();
         }
         $request = request();

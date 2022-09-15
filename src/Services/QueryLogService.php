@@ -4,6 +4,7 @@ namespace Litermi\Logs\Services;
 
 use DateTime;
 use Illuminate\Support\Str;
+use Litermi\Logs\Facades\LogConsoleFacade;
 
 /**
  *
@@ -48,7 +49,6 @@ class QueryLogService
             'time_query'   => $query->time,
             'query_active' => $queryActive,
         ];
-        $sendConsoleLog = new SendLogConsoleService();
-        $sendConsoleLog->execute('query complete:' . $sql, $arrayQuery);
+        LogConsoleFacade::full()->log('query complete:' . $sql, $arrayQuery);
     }
 }
