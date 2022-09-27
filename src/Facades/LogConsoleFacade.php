@@ -3,12 +3,13 @@
 namespace Litermi\Logs\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Litermi\Logs\Services\SendLogConsoleService;
 
 /**
- * @method static self simple()
- * @method static self full()
- * @method static self tracker()
- * @method static self typeLog(string $connection)
+ * @method static SendLogConsoleService simple()
+ * @method static SendLogConsoleService full()
+ * @method static SendLogConsoleService tracker()
+ * @method static SendLogConsoleService typeLog(string $connection)
  * @method static void log(string $message, array $extraValues = [])
  *
  */
