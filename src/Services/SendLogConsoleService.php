@@ -15,12 +15,12 @@ class SendLogConsoleService
     /**
      * @var
      */
-    public $type_log = "";
+    private $type_log = "";
 
     /**
      * @var
      */
-    public bool $tracker = false;
+    private bool $tracker = false;
 
     public function __construct()
     {

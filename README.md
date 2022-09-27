@@ -48,6 +48,11 @@ add provider in config/app.php
    ]
 ```
 
+```php
+$extraValues['test'] = 1;
+LogConsoleFacade::full()->tracker()->log('your message', $extraValues);
+```
+
 
 ## License
 
