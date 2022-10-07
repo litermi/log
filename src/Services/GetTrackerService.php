@@ -23,6 +23,9 @@ class GetTrackerService
         $tracker = $tracker->map( self::mapRemoveExtraElement() );
         $tracker = $tracker->values();
 
+        $tracker = $tracker->toJson();
+        $tracker = str_replace("\\", "", $tracker);
+
         return $tracker;
     }
 
