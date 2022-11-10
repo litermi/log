@@ -109,7 +109,7 @@ class SendLogConsoleService
             $values[ 'data_log' ][ 'time' ]         = gmdate("Y-m-d H:i:s");
             $values[ 'data_log' ][ 'message' ]      = $message;
             $values[ 'data_log' ][ 'extra_values' ] = $extraValues;
-            $this->logConsoleDirect($values);
+            $this->logConsoleDirect($values, $message);
             return;
         }
 
@@ -147,21 +147,32 @@ class SendLogConsoleService
             }
         }
 
-        $this->logConsoleDirect($values);
+        $this->logConsoleDirect($values, $message);
     }
 
     /**
      * @param $values
+     * @param $message
      */
-    private function logConsoleDirect($values): void
+    private function logConsoleDirect($values, $message): void
     {
-        $string = "";
         try {
             $string = json_encode($values);
+            $string = str_replace("\\", '', $string);
+            Log::channel('stderr')->info($string);
+            return;
+        }
+        catch(Exception $exception) {
+        }
+
+        $string = "";
+        try {
+            $string = json_encode($message);
         }
         catch(Exception $exception) {
             $string = "error encode log";
         }
+
         $string = str_replace("\\", '', $string);
         Log::channel('stderr')
             ->info($string);
