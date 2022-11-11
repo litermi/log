@@ -165,7 +165,6 @@ class SendLogConsoleService
         catch(Exception $exception) {
         }
 
-        $string = "";
         try {
             $string = json_encode($message);
         }
