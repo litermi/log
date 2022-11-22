@@ -58,6 +58,15 @@ return [
 
 
     /*
+     * get global special values from request
+     * example:
+     */
+    'get_global_special_values_from_request' => [
+        'job_name' => 'job_name',
+    ],
+
+
+    /*
      * get special values from request
      * example:
      */

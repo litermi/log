@@ -109,6 +109,7 @@ class SendLogConsoleService
             $values[ 'data_log' ][ 'time' ]         = gmdate("Y-m-d H:i:s");
             $values[ 'data_log' ][ 'message' ]      = $message;
             $values[ 'data_log' ][ 'extra_values' ] = $extraValues;
+            $values = $this->getGlobalSpecialValuesFromRequest($request,$values);
             $this->logConsoleDirect($values, $message);
             return;
         }
@@ -140,6 +141,7 @@ class SendLogConsoleService
         $values[ 'data_log' ][ 'env' ]          = config('app.env');
         $values[ 'data_log' ][ 'request_all' ]  = $parameters;
         $values[ 'data_log' ][ 'extra_values' ] = $extraValues;
+        $values = $this->getGlobalSpecialValuesFromRequest($request,$values);
 
         foreach (config('logs.get_special_values_from_request') as $key => $item) {
             if ($request->$item) {
@@ -148,6 +150,19 @@ class SendLogConsoleService
         }
 
         $this->logConsoleDirect($values, $message);
+    }
+
+    /**
+     * @param Request $request
+     * @param         $values
+     */
+    private function getGlobalSpecialValuesFromRequest(Request $request, $values):array {
+        foreach (config('logs.get_global_special_values_from_request') as $key => $item) {
+            if ($request->$item) {
+                $values[ 'data_log' ][ $key ] = $request->$item;
+            }
+        }
+        return $values;
     }
 
     /**
