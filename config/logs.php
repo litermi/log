@@ -73,4 +73,22 @@ return [
     'get_special_values_from_request' => [
         'ip' => 'ip',
     ],
+
+    /*
+     * header name to check if job is sync
+     * example:
+     */
+    'name_header_sync_job' => "",
+
+    /*
+     * base uri from to send request
+     * example:
+     */
+    'base_uri_send_log_request' => "",
+
+    /*
+     * base path from to send request
+     * example:
+     */
+    'base_path_send_log_request' => "",
 ];

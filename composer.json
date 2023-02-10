@@ -10,6 +10,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^7.2",
         "illuminate/database": "^7.20|^8.19|^9.0",
         "illuminate/http": "^7.20|^8.19|^9.0",
         "illuminate/contracts": "^7.20|^8.19|^9.0",
