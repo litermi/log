@@ -84,32 +84,6 @@ class SendLogConsoleService
      */
     public function execute($message, $extraValues = []): void
     {
-        $nameHeaderSyncJob = config('logs.name_header_sync_job');
-        $baseUri           = config('logs.base_uri_send_log_request');
-        $requestPath       = config('logs.base_path_send_log_request');
-        $typeJob           = request()->header($nameHeaderSyncJob);
-        if (empty($nameHeaderSyncJob) === false && empty($typeJob) === false) {
-            $client = new Client(
-                [
-                    'base_uri' => $baseUri,
-                    'curl'     => [
-                        CURLOPT_SSL_VERIFYPEER => false,
-                    ],
-                ]
-            );
-
-            $method                           = 'POST';
-            $extraValues['message']           = $message;
-            $formAndHeader                    = ['json' => $extraValues, 'headers' => [],];
-            $formAndHeader['timeout']         = 0.4;
-            $formAndHeader['connect_timeout'] = 0.4;
-
-            try {
-                $client->request($method, $requestPath, $formAndHeader);
-            } catch (Exception $exception) {
-            }
-            return;
-        }
 
         if ( !is_array($extraValues)) {
             $extraValues = [];
@@ -142,6 +116,7 @@ class SendLogConsoleService
             $values['data_log']['extra_values'] = $extraValues;
             $values                             = $this->getGlobalSpecialValuesFromRequest($request, $values);
             $this->logConsoleDirect($values, $message);
+            $this->logRequest($values, $message);
             return;
         }
 
@@ -181,6 +156,7 @@ class SendLogConsoleService
         }
 
         $this->logConsoleDirect($values, $message);
+        $this->logRequest($values, $message);
     }
 
     /**
@@ -220,5 +196,41 @@ class SendLogConsoleService
         $string = str_replace("\\", '', $string);
         Log::channel('stderr')
             ->info($string);
+    }
+
+    /**
+     * @param $values
+     * @param $message
+     * @return void
+     * @throws GuzzleException
+     */
+    public function logRequest($values, $message): void
+    {
+        $nameHeaderSyncJob = config('logs.name_header_sync_job');
+        $baseUri           = config('logs.base_uri_send_log_request');
+        $requestPath       = config('logs.base_path_send_log_request');
+        $typeJob           = request()->header($nameHeaderSyncJob);
+        if (empty($nameHeaderSyncJob) === false && empty($typeJob) === false) {
+            $client = new Client(
+                [
+                    'base_uri' => $baseUri,
+                    'curl'     => [
+                        CURLOPT_SSL_VERIFYPEER => false,
+                    ],
+                ]
+            );
+
+            $method                           = 'POST';
+            $values['message']                = $message;
+            $formAndHeader                    = ['json' => $values, 'headers' => [],];
+            $formAndHeader['timeout']         = 0.4;
+            $formAndHeader['connect_timeout'] = 0.4;
+
+            try {
+                $client->request($method, $requestPath, $formAndHeader);
+            } catch (Exception $exception) {
+            }
+        }
+
     }
 }
