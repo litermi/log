@@ -223,8 +223,6 @@ class SendLogConsoleService
             $method                           = 'POST';
             $values['message']                = $message;
             $formAndHeader                    = ['json' => $values, 'headers' => [],];
-            $formAndHeader['timeout']         = 0.4;
-            $formAndHeader['connect_timeout'] = 0.4;
 
             try {
                 $client->request($method, $requestPath, $formAndHeader);
