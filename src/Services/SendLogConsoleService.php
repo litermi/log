@@ -84,7 +84,6 @@ class SendLogConsoleService
      */
     public function execute($message, $extraValues = []): void
     {
-
         if ( !is_array($extraValues)) {
             $extraValues = [];
         }
@@ -147,7 +146,8 @@ class SendLogConsoleService
         $values['data_log']['env']          = config('app.env');
         $values['data_log']['request_all']  = $parameters;
         $values['data_log']['extra_values'] = $extraValues;
-        $values                             = $this->getGlobalSpecialValuesFromRequest($request, $values);
+
+        $values = $this->getGlobalSpecialValuesFromRequest($request, $values);
 
         foreach (config('logs.get_special_values_from_request') as $key => $item) {
             if ($request->$item) {
@@ -168,6 +168,9 @@ class SendLogConsoleService
         foreach (config('logs.get_global_special_values_from_request') as $key => $item) {
             if ($request->$item) {
                 $values['data_log'][$key] = $request->$item;
+            }
+            if ($request->header($item)) {
+                $values['data_log'][$key] = $request->header($item);
             }
         }
         return $values;
@@ -220,9 +223,9 @@ class SendLogConsoleService
                 ]
             );
 
-            $method                           = 'POST';
-            $values['message']                = $message;
-            $formAndHeader                    = ['json' => $values, 'headers' => [],];
+            $method            = 'POST';
+            $values['message'] = $message;
+            $formAndHeader     = ['json' => $values, 'headers' => [],];
 
             try {
                 $client->request($method, $requestPath, $formAndHeader);
